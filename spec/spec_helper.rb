@@ -8,6 +8,8 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'dm-rspec'
+require 'data_mapper'
+require 'dm-postgres-adapter'
 require 'database_cleaner'
 require './app/models/space'
 require_relative 'web_helper'
@@ -58,18 +60,18 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :transaction
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
-  #
-  # config.before(:each) do
-  #   DatabaseCleaner.start
-  # end
-  #
-  # config.after(:each) do
-  #   DatabaseCleaner.clean
-  # end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

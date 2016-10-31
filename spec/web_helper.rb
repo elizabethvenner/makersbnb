@@ -1,7 +1,7 @@
-def add_space(name: "Stylish appartment in London Bridge.",
+def add_space(name: "Stylish apartment in London Bridge.",
               location: "London Bridge",
               description: "Spacious 2 bed apartment with ensuite bathroom and kitchenette with lovely views of the river.",
-              price: "£120 per night")
+              price: 120)
   visit '/space/add'
   fill_in :name, with: name
   fill_in :location, with: location

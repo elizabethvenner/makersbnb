@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Makers BnB - Invite strangers into your home</h1>
+
+    <div class="">
+
+      <h2>Spaces</h2>
+
+      <ul id="spaces">
+        <% @spaces.each do |space| %>
+        <li>
+          <%= space.name %><br>
+          <p>Location: <%= space.location %></p>
+          <p>Description: <%= space.description %></p>
+          <p>Price: £<%= space.price %> per night</p>
+          <p>Email: example@aol.com</p>
+          <p>Space available: 1 November 2016</p>
+        </li>
+        <% end %>
+      </ul>
+
+    </div>
+  </body>
+</html>

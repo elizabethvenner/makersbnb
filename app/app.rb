@@ -9,6 +9,15 @@ class MakersBnb < Sinatra::Base
     erb :index
   end
 
+  get '/space/add' do
+    erb :add_space
+  end
+
+  post '/space' do
+
+  end
+
+
   # get '/spaces' do
   #   erb :spaces
   # end

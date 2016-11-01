@@ -7,11 +7,12 @@ require_relative 'data_mapper_setup'
 class MakersBnb < Sinatra::Base
 
   get '/' do
-    erb :index
+    redirect to('/listings')
   end
 
   get '/listings' do
     @spaces = Space.all
+    p @spaces
     erb :spaces
   end
 
@@ -24,6 +25,7 @@ class MakersBnb < Sinatra::Base
                          location: params[:location],
                          description: params[:description],
                          price: params[:price])
+    p space
     space.save
     redirect '/listings'
   end

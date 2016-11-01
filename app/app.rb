@@ -1,10 +1,15 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative 'data_mapper_setup'
 
 
 class MakersBnb < Sinatra::Base
+
+  register Sinatra::Flash
+  enable :sessions
+  set :session_secret, 'MakersBnb super secret'
 
   get '/' do
     redirect to('/listings')
@@ -32,12 +37,10 @@ class MakersBnb < Sinatra::Base
 
   get '/user/new' do
     @user = User.new
-    erb :signup
+    erb :'user/new'
   end
 
-
   post '/user' do
-
     @user = User.create(
       first_name: params[:first_name],
       surname: params[:surname],
@@ -45,9 +48,20 @@ class MakersBnb < Sinatra::Base
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
+    if @user.save
+      session[:user_id] = @user.id
+      redirect to('/listings')
+    else
+      flash.now[:notice] = "Sorry, Passwords mismatch!!"
+      erb :'user/new'
+    end
 
-    @user.save
-    redirect to ('/listings')
+  end
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
   end
 
 

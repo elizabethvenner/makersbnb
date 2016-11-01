@@ -5,7 +5,12 @@
     <title>MakersBnb</title>
   </head>
   <body>
-    <h4>Welcome John</h4>
+    <% if current_user %>
+      <h4>Welcome <%= current_user.first_name %></h4>
+    <% end %>
+    <% if flash[:notice] %>
+      <div id='notice'> <%= flash[:notice] %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

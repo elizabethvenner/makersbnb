@@ -7,11 +7,12 @@ require_relative 'data_mapper_setup'
 class MakersBnb < Sinatra::Base
 
   get '/' do
-    erb :index
+    redirect to('/listings')
   end
 
   get '/listings' do
     @spaces = Space.all
+    p @spaces
     erb :spaces
   end
 
@@ -24,14 +25,31 @@ class MakersBnb < Sinatra::Base
                          location: params[:location],
                          description: params[:description],
                          price: params[:price])
+    p space
     space.save
     redirect '/listings'
   end
 
+  get '/user/new' do
+    @user = User.new
+    erb :signup
+  end
 
-  # get '/spaces' do
-  #   erb :spaces
-  # end
+
+  post '/user' do
+
+    @user = User.create(
+      first_name: params[:first_name],
+      surname: params[:surname],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
+
+    @user.save
+    redirect to ('/listings')
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0

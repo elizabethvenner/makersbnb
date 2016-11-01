@@ -8,7 +8,7 @@ Any signed-up user can request to hire any space for one night, and this should 
 Nights for which a space has already been booked should not be available for users to book that space.  
 Until a user has confirmed a booking request, that space can still be booked for that night.  
 
-
+```
 User stories
 
 As a user,
@@ -74,3 +74,4 @@ I would like confirming the booking to remove that date from the available dates
 As a user,
 So I can be a choosy bugger,
 I would like to keep my space available until I have confirmed.
+```

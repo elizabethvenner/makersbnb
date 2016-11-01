@@ -9,7 +9,7 @@ Nights for which a space has already been booked should not be available for use
 Until a user has confirmed a booking request, that space can still be booked for that night.
 
 User stories
-
+```
 As a renter,
 So I can rent my space,
 I want to list my place on MakersBnB
@@ -73,3 +73,4 @@ I would like confirming the booking to remove that date from the available dates
 As a user,
 So I can be a choosy bugger,
 I would like to keep my space available until I have confirmed.
+```

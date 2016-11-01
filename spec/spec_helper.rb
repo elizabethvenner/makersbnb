@@ -12,6 +12,7 @@ require 'data_mapper'
 require 'dm-postgres-adapter'
 require 'database_cleaner'
 require './app/models/space'
+require './app/models/booking'
 require_relative 'web_helper'
 
 Capybara.app = MakersBnb

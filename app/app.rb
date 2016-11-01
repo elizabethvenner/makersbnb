@@ -12,7 +12,6 @@ class MakersBnb < Sinatra::Base
 
   get '/listings' do
     @spaces = Space.all
-    p @spaces
     erb :spaces
   end
 
@@ -21,10 +20,11 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/space' do
-    space = Space.create(name: params[:name],
+    space = Space.new(name: params[:name],
                          location: params[:location],
                          description: params[:description],
                          price: params[:price])
+
     p space
     space.save
     redirect '/listings'
@@ -48,6 +48,22 @@ class MakersBnb < Sinatra::Base
 
     @user.save
     redirect to ('/listings')
+  end
+
+  post '/book' do
+    @booking = Booking.create(
+      check_in: params[:check_in],
+      check_out: params[:check_out],
+      space_id: params[:space_id]
+    )
+
+    @booking.save
+    redirect to '/listings'
+
+  end
+
+  get '/book' do
+
   end
 
 

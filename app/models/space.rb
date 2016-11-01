@@ -9,6 +9,7 @@ class Space
   property :location, String
   property :description, String, length: 500
   property :price, Integer
+  property :available, Boolean, default: true
 
   has n, :bookings
   belongs_to :user

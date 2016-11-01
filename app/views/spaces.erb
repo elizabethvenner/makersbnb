@@ -4,6 +4,12 @@
     <div class="">
 
       <h2>Spaces</h2>
+      <form class="booking" action="/book" method="post">
+        <input class="check_in" type="date" name="check_in">
+        <input type="date" name="check_out">
+  
+        <input type="submit" value="Request space">
+      </form>
 
       <ul id="spaces">
         <% @spaces.each do |space| %>
@@ -19,4 +25,3 @@
       </ul>
 
     </div>
-  

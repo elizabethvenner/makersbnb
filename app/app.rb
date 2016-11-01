@@ -28,7 +28,11 @@ class MakersBnb < Sinatra::Base
     redirect '/listings'
   end
 
+  get '/user/new' do
+    erb :signup
+  end
 
+  post
   # get '/spaces' do
   #   erb :spaces
   # end

@@ -11,5 +11,6 @@ class Space
   property :price, Integer
 
   has n, :bookings
+  belongs_to :user
 
 end

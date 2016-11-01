@@ -117,12 +117,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   capybara
   data_mapper
   database_cleaner
   dm-postgres-adapter
   dm-rspec
   dm-transactions
+  dm-validations
   pg
   rake
   rspec

@@ -1,5 +1,7 @@
 feature 'add space' do
+
   scenario 'user adds a new space to the listings' do
+    user_signup
     add_space
 
     within 'ul#spaces' do

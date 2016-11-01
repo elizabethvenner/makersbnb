@@ -17,7 +17,6 @@ class MakersBnb < Sinatra::Base
 
   get '/listings' do
     @spaces = Space.all
-    p @spaces
     erb :spaces
   end
 
@@ -26,12 +25,11 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/space' do
-    space = Space.create(name: params[:name],
-                         location: params[:location],
-                         description: params[:description],
-                         price: params[:price])
-    p space
-    space.save
+    Space.create(name: params[:name],
+                 location: params[:location],
+                 description: params[:description],
+                 price: params[:price],
+                 user: current_user)
     redirect '/listings'
   end
 
@@ -52,7 +50,7 @@ class MakersBnb < Sinatra::Base
       session[:user_id] = @user.id
       redirect to('/listings')
     else
-      flash.now[:notice] = "Sorry, Passwords mismatch!!"
+      flash.now[:errors] = @user.errors.full_messages
       erb :'user/new'
     end
 

@@ -10,4 +10,6 @@ class Space
   property :description, String, length: 500
   property :price, Integer
 
+  has n, :bookings
+
 end

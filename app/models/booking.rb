@@ -7,4 +7,6 @@ class Booking
   property :id, Serial
   property :begin_date, Date
   property :end_date, Date
+
+  belongs_to :space
 end

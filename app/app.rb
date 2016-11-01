@@ -29,13 +29,25 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/user/new' do
+    @user = User.new
     erb :signup
   end
 
-  post
-  # get '/spaces' do
-  #   erb :spaces
-  # end
+
+  post '/user' do
+
+    @user = User.create(
+      first_name: params[:first_name],
+      surname: params[:surname],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
+
+    @user.save
+    redirect to ('/listings')
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0

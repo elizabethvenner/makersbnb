@@ -1,6 +1,6 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
-require 'bcrypt'
+# require 'bcrypt'
 require 'dm-validations'
 
 class User
@@ -21,4 +21,15 @@ class User
 
   attr_reader :password
   attr_accessor :password_confirmation
+
+  validates_confirmation_of :password, message:"Sorry, Passwords mismatch!!"
+
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
+
+
+
+
 end

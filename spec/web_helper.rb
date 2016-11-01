@@ -17,7 +17,7 @@ def user_signup(first_name: "John",
                 password_confirmation: "password")
 
   visit 'user/new'
-  # expect(page.status_code).to eq(200)
+  expect(page.status_code).to eq(200)
 
   fill_in :first_name, with: first_name
   fill_in :surname, with: surname

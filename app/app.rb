@@ -27,16 +27,16 @@ class MakersBnb < Sinatra::Base
 
   post '/space' do
     Space.create(name: params[:name],
-                 location: params[:location],
-                 description: params[:description],
-                 price: params[:price],
-                 user: current_user)
+    location: params[:location],
+    description: params[:description],
+    price: params[:price],
+    user: current_user)
 
     redirect '/listings'
   end
 
   get '/user/new' do
-    if session[:user_id] == nil
+    if !current_user
       @user = User.new
       erb :'user/new'
     else
@@ -47,11 +47,11 @@ class MakersBnb < Sinatra::Base
 
   post '/user' do
     @user = User.create(
-      first_name: params[:first_name],
-      surname: params[:surname],
-      email: params[:email],
-      password: params[:password],
-      password_confirmation: params[:password_confirmation]
+    first_name: params[:first_name],
+    surname: params[:surname],
+    email: params[:email],
+    password: params[:password],
+    password_confirmation: params[:password_confirmation]
     )
 
     if @user.save
@@ -64,7 +64,7 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/sessions/new' do
-    if session[:user_id] == nil
+    if !current_user
       erb :'sessions/new'
     else
       flash.keep[:notice] = "Already signed in!"
@@ -91,9 +91,9 @@ class MakersBnb < Sinatra::Base
 
   post '/book' do
     @booking = Booking.create(
-      check_in: params[:check_in],
-      space_id: params[:space_id],
-      user: current_user)
+    check_in: params[:check_in],
+    space_id: params[:space_id],
+    user: current_user)
 
     if @booking.save
       flash.keep[:notice] = "Thank you. Your request has been sent!"
@@ -101,8 +101,17 @@ class MakersBnb < Sinatra::Base
     end
   end
 
-  get '/book' do
-
+  get '/sessions/user/spaces/requests' do
+    @allrequests = Booking.all
+    p @allrequests
+    @allrequests.each do |request|
+      @userrequests = []
+      if request.space_id.user_id == current_user
+        @userrequests << request
+      end
+    end
+    @requests = @userrequests.all
+    erb :requests
   end
 
 

@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup'
 
 
 class MakersBnb < Sinatra::Base
+  use Rack::MethodOverride
 
   register Sinatra::Flash
   enable :sessions
@@ -30,6 +31,7 @@ class MakersBnb < Sinatra::Base
                  description: params[:description],
                  price: params[:price],
                  user: current_user)
+
     redirect '/listings'
   end
 
@@ -80,10 +82,32 @@ class MakersBnb < Sinatra::Base
     end
   end
 
+  delete '/sessions' do
+    session[:user_id] = nil
+    flash.keep[:notice] = 'Goodbye!'
+    redirect to('/listings')
+  end
+
   helpers do
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+  end
+
+  post '/book' do
+    @booking = Booking.create(
+      check_in: params[:check_in],
+      check_out: params[:check_out],
+      space_id: params[:space_id]
+    )
+
+    @booking.save
+    redirect to '/listings'
+
+  end
+
+  get '/book' do
+
   end
 
 

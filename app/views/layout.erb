@@ -5,12 +5,36 @@
   <title>MakersBnb</title>
 </head>
 <body>
+
   <% if current_user %>
   <h4>Welcome <%= current_user.first_name %></h4>
+
+  <form method='post' action='/sessions'>
+    <input type='hidden' name='_method' value='delete'>
+    <button type="submit">Sign Out</button>
+  </form>
+
   <% end %>
+
+  <% if current_user == nil %>
+
+  <form method='get' action='/sessions/new'>
+    <button type="submit">Log In</button>
+  </form>
+
+  <form method='get' action='/user/new'>
+    <button type="submit">New User</button>
+  </form>
+
+  <% end %>
+
+
+
+
   <% if flash[:notice] %>
     <div id='notice'><%= flash[:notice] %></div>
   <% end %>
+
   <% if flash[:errors] && !flash[:errors].empty? %>
   <ul id='errors'>
     <% flash[:errors].each do |error| %>
@@ -18,6 +42,7 @@
     <% end %>
   </ul>
   <% end %>
+
   <%= yield %>
 </body>
 </html>

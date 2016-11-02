@@ -4,6 +4,12 @@
     <div class="">
 
       <h2>Spaces</h2>
+      <form class="booking" action="/book" method="post">
+        <input class="check_in" type="date" name="check_in">
+        <input type="date" name="check_out">
+
+        <input type="submit" value="Request space">
+      </form>
 
       <ul id="spaces">
         <% @spaces.each do |space| %>
@@ -12,11 +18,10 @@
           <p>Location: <%= space.location %></p>
           <p>Description: <%= space.description %></p>
           <p>Price: £<%= space.price %> per night</p>
-          <p>Email: example@aol.com</p>
+          <p>Email: <%= space.user.email %></p>
           <p>Space available: 1 November 2016</p>
         </li>
         <% end %>
       </ul>
 
     </div>
-  

@@ -10,31 +10,6 @@ def add_space(name: "Stylish apartment in London Bridge.",
   click_button "Add space"
 end
 
-def add_space_a(name: "Shabby chic apartment in Shoreditch",
-              location: "Shoreditch",
-              description: "Cosy 1 bed studio.",
-              price: 110
-              )
-  visit '/space/add'
-  fill_in :name, with: name
-  fill_in :location, with: location
-  fill_in :description, with: description
-  fill_in :price, with: price
-  click_button "Add space"
-end
-
-def add_space_b(name: "Stylish apartment in London Bridge.",
-              location: "Chelsea",
-              description: "Beautiful 3 bed city apartment",
-              price: 300)
-  visit '/space/add'
-  fill_in :name, with: name
-  fill_in :location, with: location
-  fill_in :description, with: description
-  fill_in :price, with: price
-  click_button "Add space"
-end
-
 def user_signup(first_name: "John",
                 surname: "Smith",
                 email: "j.smith@aol.com",

@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup'
 
 
 class MakersBnb < Sinatra::Base
+  use Rack::MethodOverride
 
   register Sinatra::Flash
   enable :sessions
@@ -30,7 +31,7 @@ class MakersBnb < Sinatra::Base
                  description: params[:description],
                  price: params[:price],
                  user: current_user)
-                 
+
     redirect '/listings'
   end
 
@@ -69,6 +70,12 @@ class MakersBnb < Sinatra::Base
       flash.now[:errors] = ['The email or password is incorrect']
       erb :'sessions/new'
     end
+  end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    flash.keep[:notice] = 'Goodbye!'
+    redirect to('/listings')
   end
 
   helpers do

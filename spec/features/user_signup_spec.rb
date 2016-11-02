@@ -12,4 +12,6 @@ feature 'User sign-up' do
     expect(page).to have_content 'Sorry, Passwords mismatch!!'
   end
 
+  
+
 end

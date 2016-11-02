@@ -7,6 +7,6 @@ feature 'book space' do
     fill_in :check_in, with: "06/11/2016"
     click_button 'Request space'
 
-    expect(page).to have_content('You have requested this space from 6 Nov 2016 to 8 Nov 2016')
+    expect(page).to have_content("Thank you. Your request has been sent!")
   end
 end

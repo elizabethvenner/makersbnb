@@ -16,8 +16,8 @@
           <p>Space available: <%= space.available %> </p>
           <form class="booking" action="/book" method="post">
             <input class="check_in" type="date" name="check_in">
-            <input type="submit" value="Request space">
             <input type="hidden" name="space_id" value="<%= space.id %>">
+            <input type="submit" value="Request space">
           </form>
         </li>
         <% end %>

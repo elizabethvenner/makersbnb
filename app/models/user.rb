@@ -18,8 +18,8 @@ class User
     }
   property :password_digest, BCryptHash
 
-  has n, :spaces, through: Resource
-
+  has n, :spaces
+  
   attr_reader :password
   attr_accessor :password_confirmation
 

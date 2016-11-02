@@ -30,13 +30,13 @@ class MakersBnb < Sinatra::Base
                  location: params[:location],
                  description: params[:description],
                  price: params[:price],
-                 user: current_user)
+                 user_id: current_user.id)
 
     redirect '/listings'
   end
 
   get '/user/new' do
-    if session[:user_id] == nil
+    if !current_user
       @user = User.new
       erb :'user/new'
     else
@@ -63,7 +63,7 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/sessions/new' do
-    if session[:user_id] == nil
+    if !current_user
       erb :'sessions/new'
     else
       flash.keep[:notice] = "Already signed in!"

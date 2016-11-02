@@ -95,11 +95,12 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/book' do
-    p params
+    
     @booking = Booking.create(
       check_in: params[:check_in],
-      space_id: params[:space_id]
-    )
+      space_id: params[:space_id],
+      user: current_user)
+
     p @booking
     p @booking.check_in
 

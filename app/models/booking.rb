@@ -9,4 +9,6 @@ class Booking
   # property :check_out, Date
 
   belongs_to :space
+  belongs_to :user
+  
 end

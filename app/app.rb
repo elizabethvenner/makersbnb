@@ -53,6 +53,7 @@ class MakersBnb < Sinatra::Base
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
+
     if @user.save
       session[:user_id] = @user.id
       redirect to('/listings')
@@ -88,28 +89,28 @@ class MakersBnb < Sinatra::Base
     redirect to('/listings')
   end
 
-  helpers do
-    def current_user
-      @current_user ||= User.get(session[:user_id])
-    end
-  end
-
   post '/book' do
     @booking = Booking.create(
       check_in: params[:check_in],
-      check_out: params[:check_out],
-      space_id: params[:space_id]
-    )
+      space_id: params[:space_id],
+      user: current_user)
 
-    @booking.save
-    redirect to '/listings'
-
+    if @booking.save
+      flash.keep[:notice] = "Thank you. Your request has been sent!"
+      redirect to '/listings'
+    end
   end
 
   get '/book' do
 
   end
 
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
+  end
 
   # start the server if ruby file executed directly
   run! if app_file == $0

@@ -9,12 +9,11 @@ class User
   property :id,             Serial
   property :first_name,     String
   property :surname,        String
-  property :email,      String, required: true, format: :email_address, unique: true,
+  property :email,          String, required: true, format: :email_address, unique: true,
     messages: {
       presence: "Email is mandatory",
       format: "Please enter a correct email address",
       is_unique: "This email is already in use"
-
     }
   property :password_digest, BCryptHash
 
@@ -41,8 +40,5 @@ class User
       nil
     end
   end
-
-
-
 
 end

@@ -36,8 +36,13 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/user/new' do
-    @user = User.new
-    erb :'user/new'
+    if session[:user_id] == nil
+      @user = User.new
+      erb :'user/new'
+    else
+      flash.keep[:notice] = 'Please log out to create a new user!'
+      redirect('/listings')
+    end
   end
 
   post '/user' do
@@ -58,7 +63,12 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/sessions/new' do
-    erb :'sessions/new'
+    if session[:user_id] == nil
+      erb :'sessions/new'
+    else
+      flash.keep[:notice] = "Already signed in!"
+      redirect to ("/listings")
+    end
   end
 
   post '/sessions' do

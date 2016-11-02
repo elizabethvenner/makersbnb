@@ -1,0 +1,14 @@
+<% if @user_spaces.count > 0 %>
+  <ul id="spaces">
+    <% @user_spaces.each do |space| %>
+    <li>
+      <%= space.name %><br>
+      <p>Location: <%= space.location %></p>
+      <p>Description: <%= space.description %></p>
+      <p>Price: £<%= space.price %> per night</p>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2>"You  don't have any spaces!"</h2>
+<% end %>

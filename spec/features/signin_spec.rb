@@ -20,4 +20,11 @@ feature 'user signin' do
     expect(page).to have_content("The email or password is incorrect")
 
   end
+
+  scenario 'user can\'t sign again when already signed in' do
+    signin(email: user.email, password: user.password)
+    visit '/sessions/new'
+    expect(current_path).to eq('/listings')
+    expect(page).to have_content("Already signed in!")
+  end
 end

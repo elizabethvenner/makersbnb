@@ -6,9 +6,13 @@ class Booking
 
   property :id, Serial
   property :check_in, Date
-  # property :check_out, Date
+  property :check_out, Date
 
   belongs_to :space
   belongs_to :user
-  
+
+  def self.booking_range(check_in, check_out)
+    (check_in...check_out).map {|date| date }
+  end
+
 end

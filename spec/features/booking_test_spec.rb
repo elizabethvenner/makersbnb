@@ -5,6 +5,7 @@ feature 'book space' do
     visit '/listings'
     expect(page).to have_content("Stylish")
     fill_in :check_in, with: "06/11/2016"
+    fill_in :check_out, with: "09/11/2016"
     click_button 'Request space'
 
     expect(page).to have_content("Thank you. Your request has been sent!")

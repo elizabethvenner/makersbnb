@@ -16,6 +16,7 @@ feature 'show requested spaces' do
    click_button 'Sign Out'
    user2_signup
    fill_in :check_in, with: "06/11/2016"
+   fill_in :check_out, with: "09/11/2016"
    click_button 'Request space'
    click_button 'Sign Out'
    signin(email: user1.email, password: user1.password)

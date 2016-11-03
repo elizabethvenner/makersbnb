@@ -107,6 +107,7 @@ end
   post '/book' do
     @booking = Booking.create(
     check_in: params[:check_in],
+    check_out: params[:check_out],
     space_id: params[:space_id],
     user: current_user)
 

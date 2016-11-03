@@ -9,17 +9,21 @@ class User
   property :id,             Serial
   property :first_name,     String
   property :surname,        String
-  property :email,      String, required: true, format: :email_address, unique: true,
+  property :email,          String, required: true, format: :email_address, unique: true,
     messages: {
       presence: "Email is mandatory",
       format: "Please enter a correct email address",
       is_unique: "This email is already in use"
-
     }
   property :password_digest, BCryptHash
 
   has n, :spaces
+<<<<<<< HEAD
   
+=======
+  has n, :bookings
+
+>>>>>>> e84455be2f288bdfd5ec820452270212b2053f19
   attr_reader :password
   attr_accessor :password_confirmation
 
@@ -41,8 +45,5 @@ class User
       nil
     end
   end
-
-
-
 
 end

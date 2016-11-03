@@ -1,4 +1,18 @@
 feature 'myspaces page' do
+  let!(:user) do
+    User.create(first_name: "Jenny",
+                surname: "Smith",
+                email: "jenny.smith@hotmail.com",
+                password: "bau",
+                password_confirmation: "bau")
+    end
+  let (:space) do
+    Space.create(name: "Shabby chic apartment in Shoreditch.",
+                 location: "Shoreditch",
+                 description: "Cosy 1 bed studio.",
+                 price: 110,
+                 user_id: user.id)
+    end
 
   scenario 'User can see own spaces once they have been created' do
     user_signup
@@ -11,6 +25,19 @@ feature 'myspaces page' do
   scenario 'User can only see only his/her own spaces' do
     user_signup
     add_space
-    
+    click_button("My Spaces")
+    expect(current_path).to eq "/sessions/user/spaces"
+    expect(page).to have_content("Stylish apartment in London Bridge.")
+    expect(page).not_to have_content "Shabby chic apartment in Shoreditch."
+  end
+
+  scenario 'User can delete a space' do
+    user_signup
+    add_space
+    click_button("My Spaces")
+    click_button("DELETE")
+    expect(current_path).to eq "/sessions/user/spaces"
+
+    expect(page).not_to have_content("Stylish apartment in London Bridge.")
   end
 end

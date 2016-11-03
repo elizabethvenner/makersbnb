@@ -35,6 +35,12 @@ class MakersBnb < Sinatra::Base
     redirect '/listings'
   end
 
+post '/space/delete' do
+  delete_space = Space.get(params[:space_id])
+  delete_space.destroy
+  redirect to('/sessions/user/spaces')
+end
+
   get '/user/new' do
     if !current_user
       @user = User.new
@@ -84,8 +90,12 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/sessions/user/spaces' do
-    @user_spaces = Space.all(user_id: current_user)
-    erb :'sessions/user/spaces'
+    if !current_user
+      erb :'listings'
+    else
+      @user_spaces = Space.all(user: current_user)
+      erb :'sessions/user/spaces'
+    end
   end
 
   delete '/sessions' do

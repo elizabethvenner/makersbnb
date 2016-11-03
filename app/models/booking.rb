@@ -15,4 +15,8 @@ class Booking
     (check_in...check_out).map {|date| date }
   end
 
+  def self.all_space_booking(space_id)
+    Booking.all(space_id: space_id)
+  end
+
 end

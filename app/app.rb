@@ -107,17 +107,9 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/sessions/user/spaces/requests' do
-    @allrequests = Booking.all
-    p @allrequests
-    @allrequests.each do |request|
-      @userrequests = []
-      if request.space_id.user_id == current_user
-        @userrequests << request
-      end
-    end
-    @requests = @userrequests.all
-    erb :requests
-  end
+     @requests = Booking.all(space: Space.all(user: current_user))
+     erb :'sessions/user/requests'
+   end
 
 
   helpers do

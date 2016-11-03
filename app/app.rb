@@ -111,6 +111,13 @@ class MakersBnb < Sinatra::Base
      erb :'sessions/user/requests'
    end
 
+   post '/confirm' do
+     confirm_space = Space.get(params[:space_id])
+     confirm_space.update(available: false)
+     flash.keep[:notice] = 'Thank you for confirming this booking'
+     redirect to '/sessions/user/spaces/requests'
+   end
+
 
   helpers do
     def current_user

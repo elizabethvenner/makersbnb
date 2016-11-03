@@ -22,6 +22,8 @@ feature 'show requested spaces' do
    visit '/sessions/user/spaces/requests'
    find_button('Confirm').click
    expect(page).to have_content('Thank you for confirming this booking')
+   visit '/listings'
+   expect(page).to have_content('Space available: false')
  end
 
 end

@@ -6,6 +6,10 @@
 </head>
 <body>
 
+  <form method='get' action='/listings'>
+    <button type="submit">See all spaces</button>
+  </form>
+
   <% if current_user %>
   <h4>Welcome <%= current_user.first_name %></h4>
 
@@ -35,6 +39,7 @@
   </form>
 
   <% end %>
+
 
 
 

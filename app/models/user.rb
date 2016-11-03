@@ -18,12 +18,8 @@ class User
   property :password_digest, BCryptHash
 
   has n, :spaces
-<<<<<<< HEAD
-  
-=======
   has n, :bookings
 
->>>>>>> e84455be2f288bdfd5ec820452270212b2053f19
   attr_reader :password
   attr_accessor :password_confirmation
 

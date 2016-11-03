@@ -27,17 +27,10 @@ class MakersBnb < Sinatra::Base
 
   post '/space' do
     Space.create(name: params[:name],
-<<<<<<< HEAD
-                 location: params[:location],
-                 description: params[:description],
-                 price: params[:price],
-                 user_id: current_user.id)
-=======
     location: params[:location],
     description: params[:description],
     price: params[:price],
     user: current_user)
->>>>>>> e84455be2f288bdfd5ec820452270212b2053f19
 
     redirect '/listings'
   end

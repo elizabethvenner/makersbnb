@@ -10,7 +10,10 @@ feature 'myspaces page' do
 
   scenario 'User can only see only his/her own spaces' do
     user_signup
+    click_button("My Spaces")
     add_space
-    
+    user2_signup
+    add2_space
+
   end
 end

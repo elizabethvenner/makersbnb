@@ -50,5 +50,6 @@ feature 'myspaces page' do
     expect(current_path).to eq "/sessions/user/spaces"
     expect(page).not_to have_content(120)
     expect(page).to have_content(150)
+    expect(page).to have_content("Stylish apartment in London Bridge.")
   end
 end

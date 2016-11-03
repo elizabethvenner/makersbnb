@@ -117,17 +117,16 @@ end
   end
 
   get '/sessions/user/spaces/requests' do
-    @allrequests = Booking.all
-    p @allrequests
-    @allrequests.each do |request|
-      @userrequests = []
-      if request.space_id.user_id == current_user
-        @userrequests << request
-      end
-    end
-    @requests = @userrequests.all
-    erb :requests
-  end
+     @requests = Booking.all(space: Space.all(user: current_user))
+     erb :'sessions/user/requests'
+   end
+
+   post '/confirm' do
+     confirm_space = Space.get(params[:space_id])
+     confirm_space.update(available: false)
+     flash.keep[:notice] = 'Thank you for confirming this booking'
+     redirect to '/sessions/user/spaces/requests'
+   end
 
 
   helpers do

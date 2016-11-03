@@ -1,0 +1,8 @@
+<form action="/space/update" method="post">
+  <input type="hidden" name="space_id" value="<%= @edit_space.id %>">
+  <input type="text" name="name" placeholder=" <%= @edit_space.name %>">
+  <input type="text" name="location" placeholder="<%= @edit_space.location %>">
+  <input type="text" name="description" placeholder="<%= @edit_space.description %>">
+  <input type="text" name="price" placeholder="<%= @edit_space.price %>">
+  <input type="submit" value='Submit'>
+</form>

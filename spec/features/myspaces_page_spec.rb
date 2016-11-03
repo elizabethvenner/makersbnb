@@ -31,4 +31,13 @@ feature 'myspaces page' do
     expect(page).not_to have_content "Shabby chic apartment in Shoreditch."
   end
 
+  scenario 'User can delete a space' do
+    user_signup
+    add_space
+    click_button("My Spaces")
+    click_button("DELETE")
+    expect(current_path).to eq "/sessions/user/spaces"
+
+    expect(page).not_to have_content("Stylish apartment in London Bridge.")
+  end
 end

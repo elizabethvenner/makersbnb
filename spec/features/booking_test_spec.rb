@@ -1,4 +1,12 @@
 feature 'book space' do
+
+  scenario 'non signed up user cannot book space' do
+    user_signup
+    add_space
+    click_button 'Sign Out'
+    click_button 'Request space'
+    expect(page).to have_content("Please log in or sign up to request a space")
+  end
   scenario 'user request to book space' do
     user_signup
     add_space

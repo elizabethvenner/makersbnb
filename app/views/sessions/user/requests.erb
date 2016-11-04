@@ -1,24 +1,29 @@
 <% if @requests.count > 0 %>
- <ul id="spaces">
-   <% @requests.each do |request| %>
-   <li>
-     <p><%= request.user.first_name %> has requested to stay as this space:</p>
-     <%= request.space.name %><br>
-     <p>Location: <%= request.space.location %></p>
-     <p>Description: <%= request.space.description %></p>
-     <p>Price: £<%= request.space.price %> per night</p>
-     <p><%= request.check_in.strftime("Checking in on %A %d %b %Y") %></p>
-     <form class="confirm" action="/confirm" method="post">
-       <input type="hidden" name="booking_id" value="<%= request.id %>">
-       <input type="submit" name="confirm" value="Confirm">
-     </form>
-     <form class="reject" action="/reject" method="post">
-       <input type="hidden" name="booking_id" value="<%= request.id %>">
-       <input type="submit" name="reject" value="Reject">
-     </form>
-   </li>
-   <% end %>
- </ul>
+<ul id="spaces">
+  <% @requests.each do |request| %>
+  <li>
+    <p><%= request.user.first_name %> has requested to stay as this space:</p>
+    <%= request.space.name %><br>
+    <p>Location: <%= request.space.location %></p>
+    <p>Description: <%= request.space.description %></p>
+    <p>Price: £<%= request.space.price %> per night</p>
+    <p><%= request.check_in.strftime("Checking in on %A %d %b %Y") %></p>
+    <p><%= request.check_out.strftime("Checking out on %A %d %b %Y") %></p>
+    <% if request.confirmed %>
+    <p> You have confirmed this booking </p>
+    <% else %>
+    <form class="confirm" action="/confirm" method="post">
+      <input type="hidden" name="booking_id" value="<%= request.id %>">
+      <input type="submit" name="confirm" value="Confirm">
+    </form>
+    <form class="reject" action="/reject" method="post">
+      <input type="hidden" name="booking_id" value="<%= request.id %>">
+      <input type="submit" name="reject" value="Reject">
+    </form>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
 <% else %>
- <h2>You  don't have any requests! :(</h2>
+<h2>You  don't have any requests! :(</h2>
 <% end %>

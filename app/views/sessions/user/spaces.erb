@@ -6,6 +6,10 @@
       <p>Location: <%= space.location %></p>
       <p>Description: <%= space.description %></p>
       <p>Price: £<%= space.price %> per night</p>
+      <form action="/space/edit" method="get">
+        <input type="hidden" name="space_id" value="<%= space.id %>">
+        <input type="submit" value="Edit space">
+      </form>
       <form action="/space/delete" method="post">
         <input type="hidden" name="space_id" value="<%= space.id %>">
         <input type="submit" value="DELETE">

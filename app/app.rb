@@ -35,6 +35,20 @@ class MakersBnb < Sinatra::Base
     redirect '/listings'
   end
 
+  get '/space/edit' do
+    @edit_space = Space.get(params[:space_id])
+    erb :'sessions/user/edit'
+  end
+
+  post '/space/update' do
+    update_space = Space.get(params[:space_id])
+    update_space.update(name: params[:name],
+    location: params[:location],
+    description: params[:description],
+    price: params[:price])
+    redirect '/sessions/user/spaces'
+  end
+
 post '/space/delete' do
   delete_space = Space.get(params[:space_id])
   delete_space.destroy

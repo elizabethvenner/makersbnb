@@ -171,3 +171,47 @@ body {
   border-radius: 15px;
 
 }
+
+.transparent .tuyin
+	{
+	margin-top: 20px;
+	background-color: rgba(255, 255, 255, 0.37);
+	border: 1px solid #F7F7F7;
+	border-radius: 5px;
+	box-shadow: 0px 0px 2px 0px rgba(181, 181, 181, 0.3);
+	padding: 20px 40px;
+	position: relative;
+	text-align: center;
+	width: 97%;
+	min-height: 315px;
+	position: relative;
+	margin-bottom: 25px;
+	 }
+.transparent .tuyin .title
+	{
+	text-align: center;
+	color: #000;
+	font-size: 35px;
+  /*border-bottom: 1px solid #FFF;
+  padding-bottom: 15px;*/
+  padding: 10px;
+	}
+.transparent .tuyin .plan-name
+	{
+	font-size: 20px;
+	font-weight: 400;
+	border-top: 1px solid #FFF;
+	padding-bottom: 15px;
+	padding: 10px
+	}
+
+.transparent .tuyin .text
+	{
+	margin-top: 20px;
+	font-size: 25px;
+	color: #474747;
+	text-align: center;
+	font-weight: 300;
+	margin-bottom: 13px;
+	font-size: 16px;
+	}

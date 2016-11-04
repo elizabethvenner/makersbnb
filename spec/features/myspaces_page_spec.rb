@@ -44,7 +44,7 @@ feature 'myspaces page' do
     user_signup
     add_space
     click_button('My Spaces')
-    click_button('Edit space')
+    click_button('EDIT')
     fill_in :price, with: 150
     click_button('Submit')
     expect(current_path).to eq "/sessions/user/spaces"

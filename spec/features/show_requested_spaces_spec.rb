@@ -21,6 +21,8 @@ feature 'show requested spaces' do
    click_button 'Sign Out'
    signin(email: user1.email, password: user1.password)
    visit '/sessions/user/spaces/requests'
+   expect(page).to have_content("Checking in on Sunday 06 Nov 2016")
+   expect(page).to have_content("Checking out on Wednesday 09 Nov 2016")
    find_button('Confirm').click
    expect(page).to have_content('Thank you for confirming this booking')
  end

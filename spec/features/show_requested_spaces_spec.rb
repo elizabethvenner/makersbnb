@@ -28,12 +28,12 @@ feature 'show requested spaces' do
  scenario 'user can reject a request to stay at their space' do
    signin(email: user1.email, password: user1.password)
    add_space
-   click_button 'Sign Out'
+   click_button 'Log Out'
    user2_signup
    fill_in :check_in, with: "06/11/2016"
    fill_in :check_out, with: "09/11/2016"
    click_button 'Request space'
-   click_button 'Sign Out'
+   click_button 'Log Out'
    signin(email: user1.email, password: user1.password)
    visit '/sessions/user/spaces/requests'
    expect{find_button('Reject').click}.to change(Booking, :count).by(-1)

@@ -19,13 +19,13 @@ feature 'book space' do
     click_button 'Request space'
     visit '/sessions/user/spaces/requests'
     click_button 'Confirm'
-    click_button 'Sign Out'
+    click_button 'Log Out'
 
     user2_signup
     fill_in :check_in, with: "10/11/2016"
     fill_in :check_out, with: "15/11/2016"
     click_button 'Request space'
-    click_button 'Sign Out'
+    click_button 'Log Out'
 
     user3_signup
     fill_in :check_in, with: "05/11/2016"

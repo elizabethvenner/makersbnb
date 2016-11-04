@@ -36,18 +36,18 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/space/edit' do
-   @edit_space = Space.get(params[:space_id])
-   erb :'sessions/user/edit'
- end
+    @edit_space = Space.get(params[:space_id])
+    erb :'sessions/user/edit'
+  end
 
- post '/space/update' do
-   update_space = Space.get(params[:space_id])
-   update_space.update(name: params[:name],
-   location: params[:location],
-   description: params[:description],
-   price: params[:price])
-   redirect '/sessions/user/spaces'
- end
+  post '/space/update' do
+    update_space = Space.get(params[:space_id])
+    update_space.update(name: params[:name],
+    location: params[:location],
+    description: params[:description],
+    price: params[:price])
+    redirect '/sessions/user/spaces'
+  end
 
   post '/space/delete' do
     delete_space = Space.get(params[:space_id])
@@ -119,27 +119,33 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/book' do
-    @booking = Booking.new(
-    check_in: params[:check_in],
-    check_out: params[:check_out],
-    space_id: params[:space_id],
-    user: current_user)
 
-    requested_dates = Booking.booking_range(@booking.check_in, @booking.check_out)
-    all_bookings = Booking.all_space_booking(@booking.space_id)
-    all_booked_dates = Booking.space_bookings(all_bookings)
-
-    if all_bookings.empty?
-      @booking.save
-      flash.keep[:notice] = "Thank you. Your request has been sent!"
-      redirect to '/listings'
-    elsif Booking.check_available(requested_dates, all_booked_dates)
-      flash.keep[:notice] = "Sorry the space is already booked for those days"
+    if !current_user
+      flash.keep[:notice] = "Please log in or sign up to request a space"
       redirect to '/listings'
     else
-      @booking.save
-      flash.keep[:notice] = "Thank you. Your request has been sent!"
-      redirect to '/listings'
+      @booking = Booking.new(
+      check_in: params[:check_in],
+      check_out: params[:check_out],
+      space_id: params[:space_id],
+      user: current_user)
+
+      requested_dates = Booking.booking_range(@booking.check_in, @booking.check_out)
+      all_bookings = Booking.all_space_booking(@booking.space_id)
+      all_booked_dates = Booking.space_bookings(all_bookings)
+
+      if all_bookings.empty?
+        @booking.save
+        flash.keep[:notice] = "Thank you. Your request has been sent!"
+        redirect to '/listings'
+      elsif Booking.check_available(requested_dates, all_booked_dates)
+        flash.keep[:notice] = "Sorry the space is already booked for those days"
+        redirect to '/listings'
+      else
+        @booking.save
+        flash.keep[:notice] = "Thank you. Your request has been sent!"
+        redirect to '/listings'
+      end
     end
   end
 

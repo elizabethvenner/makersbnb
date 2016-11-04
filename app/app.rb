@@ -113,12 +113,7 @@ end
 
     requested_dates = Booking.booking_range(@booking.check_in, @booking.check_out)
     all_bookings = Booking.all_space_booking(@booking.space_id)
-    all_booked_dates = all_bookings.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }.flatten
-
-    p requested_dates
-    p all_bookings
-    p all_booked_dates
-    p Booking.check_available(requested_dates, all_booked_dates)
+    all_booked_dates = Booking.space_bookings(all_bookings)
 
     if all_bookings.empty?
       @booking.save

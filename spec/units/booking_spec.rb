@@ -26,6 +26,13 @@ describe Booking do
                    user_id: 2)
   end
 
+  let!(:booking2) do
+    Booking.new(check_in: "23/04/2016",
+                   check_out: "27/04/2016",
+                   space_id: house.id,
+                   user_id: 5)
+  end
+
   it {is_expected.to have_property :id}
   it {is_expected.to have_property :check_in}
   it {is_expected.to have_property :check_out }
@@ -33,16 +40,27 @@ describe Booking do
   it {is_expected.to belong_to :user}
 
   it 'is expected to create a range of booking dates' do
-    p booking.check_in
     range = Booking.booking_range(booking.check_in, booking.check_out)
-    p range
     expect(range.length).to eq 4
   end
 
   it 'returns all the bookings for a space' do
     bookings = Booking.all_space_booking(house.id)
-    p bookings.space
     expect(bookings.length).to eq 1
+  end
+
+  it 'returns an array of all the dates booked' do
+    all_bookings = Booking.all_space_booking(house.id)
+    expect(Booking.space_bookings(all_bookings).length).to eq 4
+  end
+
+  it 'returns true if space is already booked' do
+    booking2_range = Booking.booking_range(booking2.check_in, booking2.check_out)
+    p booking2_range
+    booked_dates = Booking.all_space_booking(booking2.space_id)
+    p booked_dates
+    range = booked_dates.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }.flatten
+    expect(Booking.check_available(booking2_range, range)).to eq true
   end
 
 

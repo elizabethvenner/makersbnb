@@ -19,6 +19,10 @@ class Booking
     Booking.all(space_id: space_id)
   end
 
+  def self.space_bookings(all_bookings)
+    all_bookings.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }.flatten
+  end
+
   def self.check_available(requested_dates, all_booked_dates)
     if (requested_dates.map {|x| all_booked_dates.include?(x)}).include?(true)
       true

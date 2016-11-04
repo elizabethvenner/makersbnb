@@ -58,9 +58,7 @@ describe Booking do
 
   it 'returns true if space is already booked' do
     booking2_range = Booking.booking_range(booking2.check_in, booking2.check_out)
-    p booking2_range
     booked_dates = Booking.all_space_booking(booking2.space_id)
-    p booked_dates
     range = booked_dates.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }.flatten
     expect(Booking.check_available(booking2_range, range)).to eq true
   end

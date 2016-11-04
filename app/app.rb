@@ -35,11 +35,11 @@ class MakersBnb < Sinatra::Base
     redirect '/sessions/user/spaces'
   end
 
-post '/space/delete' do
-  delete_space = Space.get(params[:space_id])
-  delete_space.destroy
-  redirect to('/sessions/user/spaces')
-end
+  post '/space/delete' do
+    delete_space = Space.get(params[:space_id])
+    delete_space.destroy
+    redirect to('/sessions/user/spaces')
+  end
 
   get '/user/new' do
     if !current_user
@@ -130,23 +130,23 @@ end
   end
 
   get '/sessions/user/spaces/requests' do
-     @requests = Booking.all(space: Space.all(user: current_user))
-     erb :'sessions/user/requests'
-   end
+    @requests = Booking.all(space: Space.all(user: current_user))
+    erb :'sessions/user/requests'
+  end
 
-   post '/confirm' do
-     confirm_booking = Booking.get(params[:booking_id])
-     confirm_booking.update(confirmed: true)
-     flash.keep[:notice] = 'Thank you for confirming this booking'
-     redirect to '/sessions/user/spaces/requests'
-   end
+  post '/confirm' do
+    confirm_booking = Booking.get(params[:booking_id])
+    confirm_booking.update(confirmed: true)
+    flash.keep[:notice] = 'Thank you for confirming this booking'
+    redirect to '/sessions/user/spaces/requests'
+  end
 
-   post '/reject' do
-     reject_booking = Booking.get(params[:booking_id])
-     reject_booking.destroy
-     flash.keep[:notice] = 'You have rejected this request'
-     redirect to '/sessions/user/spaces/requests'
-   end
+  post '/reject' do
+    reject_booking = Booking.get(params[:booking_id])
+    reject_booking.destroy
+    flash.keep[:notice] = 'You have rejected this request'
+    redirect to '/sessions/user/spaces/requests'
+  end
 
   helpers do
     def current_user

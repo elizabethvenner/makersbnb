@@ -37,7 +37,19 @@ feature 'myspaces page' do
     click_button("My Spaces")
     click_button("DELETE")
     expect(current_path).to eq "/sessions/user/spaces"
-
     expect(page).not_to have_content("Stylish apartment in London Bridge.")
+  end
+
+  scenario 'User can edit a space' do
+    user_signup
+    add_space
+    click_button('My Spaces')
+    click_button('Edit space')
+    fill_in :price, with: 150
+    click_button('Submit')
+    expect(current_path).to eq "/sessions/user/spaces"
+    expect(page).not_to have_content(120)
+    expect(page).to have_content(150)
+    expect(page).to have_content("Stylish apartment in London Bridge.")
   end
 end

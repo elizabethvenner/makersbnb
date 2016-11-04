@@ -32,7 +32,7 @@ class MakersBnb < Sinatra::Base
     price: params[:price],
     user: current_user)
 
-    redirect '/listings'
+    redirect '/sessions/user/spaces'
   end
 
 post '/space/delete' do
@@ -111,15 +111,20 @@ end
     space_id: params[:space_id],
     user: current_user)
 
-    range = Booking.booking_range(@booking.check_in, @booking.check_out)
+    requested_dates = Booking.booking_range(@booking.check_in, @booking.check_out)
     all_bookings = Booking.all_space_booking(@booking.space_id)
-    other_ranges = all_bookings.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }
+    all_booked_dates = all_bookings.map {|bookings| Booking.booking_range(bookings.check_in, bookings.check_out) }.flatten
 
-    p range
+    p requested_dates
     p all_bookings
-    p other_ranges
+    p all_booked_dates
+    p Booking.check_available(requested_dates, all_booked_dates)
 
-    if range & other_ranges == other_ranges
+    if all_bookings.empty?
+      @booking.save
+      flash.keep[:notice] = "Thank you. Your request has been sent!"
+      redirect to '/listings'
+    elsif Booking.check_available(requested_dates, all_booked_dates)
       flash.keep[:notice] = "Sorry the space is already booked for those days"
       redirect to '/listings'
     else

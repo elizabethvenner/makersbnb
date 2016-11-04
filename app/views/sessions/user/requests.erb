@@ -9,9 +9,12 @@
      <p>Price: £<%= request.space.price %> per night</p>
      <p><%= request.check_in.strftime("Checking in on %A %d %b %Y") %></p>
      <form class="confirm" action="/confirm" method="post">
-       <input type="hidden" name="space_id" value="<%= request.space.id %>">
        <input type="hidden" name="booking_id" value="<%= request.id %>">
        <input type="submit" name="confirm" value="Confirm">
+     </form>
+     <form class="reject" action="/reject" method="post">
+       <input type="hidden" name="booking_id" value="<%= request.id %>">
+       <input type="submit" name="reject" value="Reject">
      </form>
    </li>
    <% end %>

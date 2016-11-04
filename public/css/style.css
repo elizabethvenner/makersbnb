@@ -148,3 +148,17 @@ body {
 .btn{
   margin: 15px 0 15px 0;
 }
+
+.image {
+  position: relative;
+  width:100%;
+}
+
+h1 {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100;
+  padding-left: 200px;
+
+}

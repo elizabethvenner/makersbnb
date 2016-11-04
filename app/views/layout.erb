@@ -1,41 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>MakersBnb</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/normalize.css" rel="stylesheet">
+  <!-- <link href="/css/bootstrap.css" rel="stylesheet"> -->
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-
-  <% if current_user %>
-  <h4>Welcome <%= current_user.first_name %></h4>
-
-  <form method='post' action='/sessions'>
-    <input type='hidden' name='_method' value='delete'>
-    <button type="submit">Sign Out</button>
-  </form>
-
-  <form action="/sessions/user/spaces" method="get">
-    <button type="submit">My Spaces</button>
-  </form>
-
-  <form action="/space/add" method="get">
-    <button type="submit">Add New Space</button>
-  </form>
-
-  <% end %>
-
-  <% if current_user == nil %>
-
-  <form method='get' action='/sessions/new'>
-    <button type="submit">Log In</button>
-  </form>
-
-  <form method='get' action='/user/new'>
-    <button type="submit">New User</button>
-  </form>
-
-  <% end %>
-
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/listings" name="top"> MakersBnb </a>
+        <div class="nav-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/listings"><i class="icon-home"></i> Places </a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+            <li><h4 style="color:black;display:inline-block;">Welcome <%= current_user.first_name %></h4></li>
+            <li>
+              <a href="/sessions/user/spaces">My Spaces</a>
+            </li>
+            <li>
+              <a href="/space/add">Add New Space</a>
+            </li>
+            <li>
+              <form method='post' action='/sessions' class="navbar-form navbar-right">
+                <input type='hidden' name='_method' value='delete'>
+                <button type="submit" class="btn btn-danger">Log Out</button>
+              </form>
+            </li>
+          </ul>
+            <% else %>
+            <ul class="nav pull-right">
+              <li>
+                <a href="/user/new"><i class="icon-user"></i> New User</a>
+              </li>
+              <li>
+                <form method='post' action='/sessions/new' class="navbar-form navbar-right">
+                  <input type='hidden' name='_method' value='get'>
+                  <button type="submit" class="btn btn-primary" id = "login">Log In</button>
+                </form>
+              </li>
+            </ul>
+            <% end %>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+      </div>
+      <!--/.navbar-inner -->
 
 
 
@@ -43,14 +65,21 @@
     <div id='notice'><%= flash[:notice] %></div>
   <% end %>
 
-  <% if flash[:errors] && !flash[:errors].empty? %>
-  <ul id='errors'>
-    <% flash[:errors].each do |error| %>
-    <li><%= error %></li>
+  <div class="errors">
+    <% if flash[:errors] && !flash[:errors].empty? %>
+    <div class="alert alert-danger" role="alert">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <ul id = 'errors'>
+        <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
     <% end %>
-  </ul>
-  <% end %>
-
+  </div>
+</div>
+<!--/.navbar -->
+</div>
   <%= yield %>
 </body>
 </html>

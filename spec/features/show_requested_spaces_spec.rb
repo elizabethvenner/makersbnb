@@ -25,6 +25,8 @@ feature 'show requested spaces' do
    expect(page).to have_content("Checking out on Wednesday 09 Nov 2016")
    find_button('Confirm').click
    expect(page).to have_content('Thank you for confirming this booking')
+   expect(page).to have_content('You have confirmed this booking')
+   expect(page).not_to have_button('Confirm')
  end
 
  scenario 'user can reject a request to stay at their space' do

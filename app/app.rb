@@ -30,6 +30,8 @@ class MakersBnb < Sinatra::Base
     location: params[:location],
     description: params[:description],
     price: params[:price],
+    available_from: params[:available_from],
+    available_to: params[:available_to],
     user: current_user)
 
     redirect '/sessions/user/spaces'

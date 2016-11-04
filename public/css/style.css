@@ -13,7 +13,7 @@ html,body{
 }
 
 body {
-  /*background: url("../img/wallpaper2.jpg")no-repeat center center fixed;*/
+  background: url("../image/london-skyline.jpg")no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -45,7 +45,7 @@ body {
 
 .nav a {
 	text-decoration: none;
-	font-size: 15px;
+	font-size: 20px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: normal;
@@ -56,7 +56,7 @@ body {
 
 .nav a:hover {
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 23px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: normal;
@@ -80,19 +80,13 @@ html,body{
 }
 
 body {
-  background: url("../img/wallpaper2.jpg")no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-size: cover;
   color: #000;
-  /*text-align: center;*/
+  text-align: center;
   text-shadow: 5px 5px 5px #666666;
   margin-top:30px;
   margin: 0 auto;
   padding-bottom: 50px;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   min-height: 100%;
   position: relative;
 
@@ -154,11 +148,26 @@ body {
   width:100%;
 }
 
-h1 {
-  position: absolute;
-  top: 20px;
-  left: 0;
+.title {
+  font-size: 35px;
+  padding: 25px;
   width: 100;
-  padding-left: 200px;
+  font-family: fantasy, Courier, "Lucida Console", monospace;
+  font-
+}
+
+.post-form h1{
+  font-size: 35px;
+  padding: 10px;
+  font-family: fantasy, Courier, "Lucida Console", monospace;
+}
+.post-form {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.75);
+  /*width: 300px;*/
+  padding: 50px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 
 }

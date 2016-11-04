@@ -33,28 +33,28 @@ class MakersBnb < Sinatra::Base
     price: params[:price],
     user: current_user)
 
-    redirect '/listings'
-  end
-
-  get '/space/edit' do
-    @edit_space = Space.get(params[:space_id])
-    erb :'sessions/user/edit'
-  end
-
-  post '/space/update' do
-    update_space = Space.get(params[:space_id])
-    update_space.update(name: params[:name],
-    location: params[:location],
-    description: params[:description],
-    price: params[:price])
     redirect '/sessions/user/spaces'
   end
 
-post '/space/delete' do
-  delete_space = Space.get(params[:space_id])
-  delete_space.destroy
-  redirect to('/sessions/user/spaces')
-end
+  get '/space/edit' do
+   @edit_space = Space.get(params[:space_id])
+   erb :'sessions/user/edit'
+ end
+
+ post '/space/update' do
+   update_space = Space.get(params[:space_id])
+   update_space.update(name: params[:name],
+   location: params[:location],
+   description: params[:description],
+   price: params[:price])
+   redirect '/sessions/user/spaces'
+ end
+
+  post '/space/delete' do
+    delete_space = Space.get(params[:space_id])
+    delete_space.destroy
+    redirect to('/sessions/user/spaces')
+  end
 
   get '/user/new' do
     if !current_user
@@ -120,29 +120,48 @@ end
   end
 
   post '/book' do
-    @booking = Booking.create(
+    @booking = Booking.new(
     check_in: params[:check_in],
+    check_out: params[:check_out],
     space_id: params[:space_id],
     user: current_user)
 
-    if @booking.save
+    requested_dates = Booking.booking_range(@booking.check_in, @booking.check_out)
+    all_bookings = Booking.all_space_booking(@booking.space_id)
+    all_booked_dates = Booking.space_bookings(all_bookings)
+
+    if all_bookings.empty?
+      @booking.save
+      flash.keep[:notice] = "Thank you. Your request has been sent!"
+      redirect to '/listings'
+    elsif Booking.check_available(requested_dates, all_booked_dates)
+      flash.keep[:notice] = "Sorry the space is already booked for those days"
+      redirect to '/listings'
+    else
+      @booking.save
       flash.keep[:notice] = "Thank you. Your request has been sent!"
       redirect to '/listings'
     end
   end
 
   get '/sessions/user/spaces/requests' do
-     @requests = Booking.all(space: Space.all(user: current_user))
-     erb :'sessions/user/requests'
-   end
+    @requests = Booking.all(space: Space.all(user: current_user))
+    erb :'sessions/user/requests'
+  end
 
-   post '/confirm' do
-     confirm_space = Space.get(params[:space_id])
-     confirm_space.update(available: false)
-     flash.keep[:notice] = 'Thank you for confirming this booking'
-     redirect to '/sessions/user/spaces/requests'
-   end
+  post '/confirm' do
+    confirm_booking = Booking.get(params[:booking_id])
+    confirm_booking.update(confirmed: true)
+    flash.keep[:notice] = 'Thank you for confirming this booking'
+    redirect to '/sessions/user/spaces/requests'
+  end
 
+  post '/reject' do
+    reject_booking = Booking.get(params[:booking_id])
+    reject_booking.destroy
+    flash.keep[:notice] = 'You have rejected this request'
+    redirect to '/sessions/user/spaces/requests'
+  end
 
   helpers do
     def current_user

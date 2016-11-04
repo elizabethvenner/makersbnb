@@ -56,6 +56,23 @@ def user2_signup(first_name: "Lacey",
   click_button "Sign Up"
 end
 
+def user3_signup(first_name: "Talluah",
+                surname: "Jones",
+                email: "t.j@aol.com",
+                password: "password",
+                password_confirmation: "password")
+
+  visit 'user/new'
+  expect(page.status_code).to eq(200)
+
+  fill_in :first_name, with: first_name
+  fill_in :surname, with: surname
+  fill_in :email, with: email
+  fill_in :password, with: password
+  fill_in :password_confirmation, with: password_confirmation
+  click_button "Sign Up"
+end
+
 def signin(email:, password:)
   visit '/sessions/new'
   expect(page.status_code).to eq(200)

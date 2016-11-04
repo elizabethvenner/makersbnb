@@ -7,6 +7,7 @@ class Booking
   property :id, Serial
   property :check_in, Date
   property :check_out, Date
+  property :confirmed, Boolean, default: false
 
   belongs_to :space
   belongs_to :user
@@ -16,7 +17,7 @@ class Booking
   end
 
   def self.all_space_booking(space_id)
-    Booking.all(space_id: space_id)
+    Booking.all(confirmed: true, space_id: space_id)
   end
 
   def self.space_bookings(all_bookings)

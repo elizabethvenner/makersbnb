@@ -136,7 +136,9 @@ end
 
    post '/confirm' do
      confirm_space = Space.get(params[:space_id])
+     confirm_booking = Booking.get(params[:booking_id])
      confirm_space.update(available: false)
+     confirm_booking.update(confirmed: true)
      flash.keep[:notice] = 'Thank you for confirming this booking'
      redirect to '/sessions/user/spaces/requests'
    end

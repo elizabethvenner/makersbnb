@@ -22,6 +22,7 @@ describe Booking do
   let!(:booking) do
     Booking.create(check_in: "24/04/2016",
                    check_out: "28/04/2016",
+                   confirmed: true,
                    space_id: house.id,
                    user_id: 2)
   end
@@ -36,6 +37,7 @@ describe Booking do
   it {is_expected.to have_property :id}
   it {is_expected.to have_property :check_in}
   it {is_expected.to have_property :check_out }
+  it {is_expected.to have_property :confirmed}
   it {is_expected.to belong_to :space}
   it {is_expected.to belong_to :user}
 

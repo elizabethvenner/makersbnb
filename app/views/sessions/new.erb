@@ -1,15 +1,21 @@
-<h1>Please sign in</h1>
-<form action="/sessions" method="post">
+<div class="post-form">
 
-<div class="form">
-  <label for="email">Email</label>
-  <input type="email" name="email" placeholder="Enter Email">
+  <h1>Please Sign In</h1>
+
+  <form action="/sessions" method="post">
+
+    <div class="form">
+      <label for="email">Email</label>
+      <input type="email" name="email" placeholder="Enter Email">
+    </div>
+
+    <div class="form">
+      <label for="password">Password</label>
+      <input type="password" name="password" placeholder="Enter Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign In</button>
+
+  </form>
+
 </div>
-
-<div class="form">
-  <label for="password">Password</label>
-  <input type="password" name="password" placeholder="Enter Password">
-</div>
-
-<button type="submit">Sign In</button>
-</form>

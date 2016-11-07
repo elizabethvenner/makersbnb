@@ -16,7 +16,7 @@ feature 'myspaces page' do
 
   scenario 'User can see own spaces once they have been created' do
     user_signup
-    click_button("My Spaces")
+    click_link("My Spaces")
 
     expect(current_path).to eq "/sessions/user/spaces"
     expect(page).to have_content "You  don't have any spaces!"
@@ -25,7 +25,7 @@ feature 'myspaces page' do
   scenario 'User can only see only his/her own spaces' do
     user_signup
     add_space
-    click_button("My Spaces")
+    click_link("My Spaces")
     expect(current_path).to eq "/sessions/user/spaces"
     expect(page).to have_content("Stylish apartment in London Bridge.")
     expect(page).not_to have_content "Shabby chic apartment in Shoreditch."
@@ -34,7 +34,7 @@ feature 'myspaces page' do
   scenario 'User can delete a space' do
     user_signup
     add_space
-    click_button("My Spaces")
+    click_link("My Spaces")
     click_button("DELETE")
     expect(current_path).to eq "/sessions/user/spaces"
     expect(page).not_to have_content("Stylish apartment in London Bridge.")
@@ -43,8 +43,8 @@ feature 'myspaces page' do
   scenario 'User can edit a space' do
     user_signup
     add_space
-    click_button('My Spaces')
-    click_button('Edit space')
+    click_link('My Spaces')
+    click_button('EDIT')
     fill_in :price, with: 150
     click_button('Submit')
     expect(current_path).to eq "/sessions/user/spaces"

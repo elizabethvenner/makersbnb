@@ -7,7 +7,7 @@ feature 'navigation buttons' do
 
   scenario 'clicking New User button' do
     visit '/'
-    click_button 'New User'
+    click_link 'New User'
     expect(current_path).to eq('/user/new')
   end
 end

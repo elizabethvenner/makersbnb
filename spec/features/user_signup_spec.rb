@@ -26,7 +26,7 @@ feature 'User sign-up' do
 
   scenario 'Cannot sign up with a email that is already in the system' do
     user_signup
-    click_button('Sign Out')
+    click_button('Log Out')
     expect{user_signup(email: "j.smith@aol.com")}.not_to change(User, :count)
     expect(current_path).to eq('/user')
     expect(page).to have_content 'This email is already in use'

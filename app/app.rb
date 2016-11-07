@@ -9,6 +9,7 @@ class MakersBnb < Sinatra::Base
   use Rack::MethodOverride
 
   register Sinatra::Flash
+  set :public_folder, proc { File.join(root, '..', 'public') }
   enable :sessions
   set :session_secret, 'MakersBnb super secret'
 

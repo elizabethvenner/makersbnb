@@ -1,27 +1,30 @@
-    <h1>Makers BnB - Invite strangers into your home</h1>
+<h1 class="title" style="font-family:fantasy;">Makers BnB - Rent out your Space!</h1>
 
-    <div class="">
-
-      <h2>Spaces</h2>
-
-      <ul id="spaces">
-        <% @spaces.each do |space| %>
-        <li>
-          <%= space.name %><br>
-          <p>Location: <%= space.location %></p>
-          <p>Description: <%= space.description %></p>
-          <p>Price: £<%= space.price %> per night</p>
-          <p>Available from: <%= space.available_from.strftime("%A %d %b %Y") %></p>
-          <p>Available to: <%= space.available_to.strftime("%A %d %b %Y") %></p>
-          <p>Email: <%= space.user.email %></p>
-          <form class="booking" action="/book" method="post">
-            <input class="check_in" type="date" name="check_in">
-            <input class="check_out" type="date" name="check_out">
-            <input type="hidden" name="space_id" value="<%= space.id %>">
-            <input type="submit" value="Request space">
-          </form>
-        </li>
-        <% end %>
-      </ul>
-
+    <div class="container">
+      <div class="row transparent">
+        <div class="spaces">
+          <div class="tuyin first">
+              <% @spaces.each do |space| %>
+                <span class="title"> <%= space.name %> </span>
+                <p class="plan-name">Location: <%= space.location %></p>
+                <div class="text">
+                  <p>Description: <%= space.description %></p>
+                  <p>Price: £<%= space.price %> per night</p>
+                  <p>Available from: <%= space.available_from.strftime("%A %d %b %Y") %></p>
+                  <p>Available to: <%= space.available_to.strftime("%A %d %b %Y") %></p>
+                  <p>Email: <%= space.user.email %></p>
+                </div>
+                <% if current_user %>
+                <form class="booking" action="/book" method="post">
+                  <input class="check_in" type="date" name="check_in"><br>
+                  <input class="check_out" type="date" name="check_out"><br>
+                  <input type="hidden" name="space_id" value="<%= space.id %>">
+                  <input type="submit" value="Request space" class="btn btn-primary">
+                </form>
+                <% end %>
+              <br>
+              <% end %>
+          </div>
+        </div>
+      </div>
     </div>

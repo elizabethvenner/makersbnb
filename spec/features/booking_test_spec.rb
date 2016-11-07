@@ -3,9 +3,8 @@ feature 'book space' do
   scenario 'non signed up user cannot book space' do
     user_signup
     add_space
-    click_button 'Sign Out'
-    click_button 'Request space'
-    expect(page).to have_content("Please log in or sign up to request a space")
+    click_button 'Log Out'
+    expect(page).not_to have_content("Request space")
   end
   scenario 'user request to book space' do
     user_signup
@@ -27,13 +26,13 @@ feature 'book space' do
     click_button 'Request space'
     visit '/sessions/user/spaces/requests'
     click_button 'Confirm'
-    click_button 'Sign Out'
+    click_button 'Log Out'
 
     user2_signup
     fill_in :check_in, with: "10/11/2016"
     fill_in :check_out, with: "15/11/2016"
     click_button 'Request space'
-    click_button 'Sign Out'
+    click_button 'Log Out'
 
     user3_signup
     fill_in :check_in, with: "05/11/2016"

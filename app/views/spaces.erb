@@ -10,6 +10,8 @@
                 <div class="text">
                   <p>Description: <%= space.description %></p>
                   <p>Price: £<%= space.price %> per night</p>
+                  <p>Available from: <%= space.available_from.strftime("%A %d %b %Y") %></p>
+                  <p>Available to: <%= space.available_to.strftime("%A %d %b %Y") %></p>
                   <p>Email: <%= space.user.email %></p>
                 </div>
                 <% if current_user %>

@@ -1,7 +1,31 @@
-<form action="/space" method="post">
-  <input type="text" name="name" placeholder="Enter space name">
-  <input type="text" name="location" placeholder="Enter space location">
-  <input type="text" name="description" placeholder="Enter space description">
-  <input type="text" name="price" placeholder="Enter space price">
-  <input type="submit" value="Add space">
-</form>
+<div class="post-form">
+
+  <h1>Please Add New Space</h1>
+
+  <form action="/space" method="post">
+
+    <div class="form">
+      <label for="name">Space name</label>
+      <input type="text" name="name" placeholder="Enter space name">
+    </div>
+
+    <div class="form">
+      <label for="location">Location</label>
+      <input type="text" name="location" placeholder="Enter space location">
+    </div>
+
+    <div class="form">
+      <label for="description">Description</label>
+      <input type="text" name="description" placeholder="Enter space description">
+    </div>
+
+    <div class="form">
+      <label for="price">Price</label>
+      <input type="text" name="price" placeholder="Enter space price">
+    </div>
+
+    <input type="submit" value="Add space" class="btn btn-primary">
+
+  </form>
+
+</div>

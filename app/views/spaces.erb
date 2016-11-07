@@ -14,12 +14,13 @@
                 </div>
                 <% if current_user %>
                 <form class="booking" action="/book" method="post">
-                  <input class="check_in" type="date" name="check_in">
-                  <input class="check_out" type="date" name="check_out">
+                  <input class="check_in" type="date" name="check_in"><br>
+                  <input class="check_out" type="date" name="check_out"><br>
                   <input type="hidden" name="space_id" value="<%= space.id %>">
-                  <input type="submit" value="Request space">
+                  <input type="submit" value="Request space" class="btn btn-primary">
                 </form>
                 <% end %>
+              <br>
               <% end %>
           </div>
         </div>

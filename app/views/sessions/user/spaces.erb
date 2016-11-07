@@ -1,4 +1,7 @@
-<% if @user_spaces.count > 0 %>
+<h1 class="title" style="font-family:fantasy;">Makers BnB - My Spaces</h1>
+
+<!-- <% if @user_spaces.count > 0 %> -->
+<!--
   <ul id="spaces">
     <% @user_spaces.each do |space| %>
     <li>
@@ -19,4 +22,39 @@
   </ul>
 <% else %>
   <h2>"You  don't have any spaces!"</h2>
-<% end %>
+<% end %> -->
+
+
+<div class="container">
+  <div class="row transparent">
+    <div class="spaces">
+      <div class="tuyin first">
+        <% if @user_spaces.count > 0 %>
+          <% @user_spaces.each do |space| %>
+            <span class="title"> <%= space.name %> </span>
+            <p class="plan-name">Location: <%= space.location %></p>
+            <div class="text">
+              <p>Location: <%= space.location %></p>
+              <p>Description: <%= space.description %></p>
+              <p>Price: £<%= space.price %> per night</p>
+            </div>
+            <br><br>
+            <div>
+            <form action="/space/edit" method="get" style="float: left;">
+              <input type="hidden" name="space_id" value="<%= space.id %>">
+              <input type="submit" value="EDIT" class="btn btn-primary">
+            </form>
+            <form action="/space/delete" method="post" style="float: right;">
+              <input type="hidden" name="space_id" value="<%= space.id %>">
+              <input type="submit" value="DELETE" class="btn btn-primary">
+            </form>
+          </div>
+            <% end %>
+          <br>
+          <% else %>
+          <h2>"You  don't have any spaces!"</h2>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
